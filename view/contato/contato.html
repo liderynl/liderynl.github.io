@@ -1,0 +1,87 @@
+<main class="main">
+    <section class="banner banner--contato">
+        <div class="container">
+            <div class="row banner__translate--y">
+                <div class="col-12 col-lg-7 mb-2">
+                    <h1 class="banner__title" data-hidden data-revel="animated fadeInDown">Contato</h1>
+                    <h2 class="banner__subtitle" data-hidden data-revel="animated fadeInDown delay-0-5s">Fale conosco. Estamos sempre à disposição para ajudar!</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 m-auto">
+                    <p class="contact__description">Preencha o formulário e esclareça todas suas dúvidas. </p>
+                    <form angular-validator-submit="mailer()" name="contactForm" novalidate angular-validator>
+						<div class="form-row">
+							<div class="form-group col-md-6 pr-md-3">
+								<label for="name">Nome</label>
+								<input  id="name"
+										name = "name"
+										class = "form-control"
+										ng-model = "contact.name"
+										required-message="'Campo obrigatório'"
+										validate-on="dirty"
+										required>
+							</div>
+
+							<div class="form-group col-md-6 pl-md-3">
+								<label for="email">E-mail</label>
+								<input  id="email"
+										type = "email"
+                                        name = "email"
+                                        class = "form-control"
+                                        ng-model = "contact.email"
+                                        invalid-message="'Digite um e-mail válido'"
+                                        required-message="'Campo obrigatório'"
+                                        validate-on="dirty"
+                                        required>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6 pr-md-3">
+								<label for="cel">Telefone</label>
+								<input  type="text"
+										id="cel"
+										name = "cel"
+										class="form-control" 
+										ng-model = "contact.cel"
+										required-message="'Campo obrigatório'"
+										invalid-message = "'Número inválido'"
+										validate-on="dirty"
+										ui-br-phone-number-mask
+										required>
+							</div>
+							<div class="form-group col-md-6 pl-md-3">
+								<label for="subject">Assunto</label>
+								<input  id="subject"
+										name = "subject"
+										class = "form-control"
+										ng-model = "contact.subject"
+										required-message="'Campo obrigatório'"
+										validate-on="dirty"
+										required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="message">Mensagem</label>
+							<textarea 	class="form-control" 
+										id="message" 
+										rows="5"
+										name = "message"
+										ng-model = "contact.message"
+										required-message="'Campo obrigatório'"
+										validate-on="dirty"
+										required></textarea>
+						</div>
+						<button type="submit" class="btn btn--blue mr-3">Enviar</button>
+					</form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,165 @@
+<!-- Modal -->
+
+<div ng-controller="formCtrl">
+
+    <form id="paizenForm" method="POST" action="https://secure.payzen.com.br/vads-payment/">
+    </form>
+
+    <div class="modal fade modal__form__lidery" id="formLidery" tabindex="-1" role="dialog" aria-labelledby="formLidery" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img class="img-fluid modal__form__lidery__image" src="../img/icons/logo-lidery.svg" alt="">
+                            <p class="modal__form__lidery__title">Faça parte da Associação Líder em Benefícios! </p>
+                            <img class="img-fluid mb-3" src="../img/icons/bg-modal.jpg" alt="">
+                            <p class="modal__form__lidery__subtitle text-left">Compre com descontos, concorra à prêmios, conte com a tranquilidade e a segurança que você merece
+                                e, ainda, contribua com causas sociais. É prático e super acessível ao seu bolso. Aproveite!</p>
+                        </div>
+                        <div class="col-md-8">
+                            <form angular-validator-submit="redirectPaizen()" name="paizenForm" novalidate angular-validator>
+                                <div class="form-group">
+                                    <label for="nameLead">Nome Completo</label>
+                                    <input id="nameLead" name="nameLead" class="form-control" ng-model="event.nameLead" required-message="'Campo obrigatório'"
+                                        validate-on="blur" ng-keyup="nameValidator()" required>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailLead">Email</label>
+                                    <input type="email" name="emailLead" class="form-control" ng-model="event.emailLead" invalid-message="'Digite um e-mail válido'"
+                                        required-message="'Campo obrigatório'" validate-on="blur" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmEmailLead">Confirme seu E-mail</label>
+                                    <input type="email" id="confirmEmailLead" name="confirmEmailLead" class="form-control" ng-model="event.confirmEmailLead"
+                                        validator="event.emailLead === event.confirmEmailLead" invalid-message="'E-mails digitados são diferentes'"
+                                        required-message="'Campo obrigatório'" validate-on="blur" ng-cut="$event.preventDefault()"
+                                        ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="celLead">Celular</label>
+                                        <input type="text" id="celLead" name="celLead" class="form-control" ng-model="event.celLead" required-message="'Campo obrigatório'"
+                                            validator="cellNumberValidator() == true" invalid-message="'Número inválido'" validate-on="blur"
+                                            ui-br-phone-number-mask="areaCode" required>
+
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <!-- <label for="otherCelLead">Outro Telefone</label>
+                                        <input type="text" id="otherCelLead" name="otherCelLead" class="form-control" ng-model="event.otherCelLead"
+                                            validator="otherCellNumberValidator() == true" invalid-message="'Número inválido'" validate-on="blur" ui-br-phone-number-mask="areaCode"> -->
+
+                                        <label for="otherCelLead">Outro Telefone</label>
+                                        <input type="text" id="otherCelLead" name="otherCelLead" class="form-control" invalid-message="'Número inválido'" validate-on="blur" ng-model="event.otherCelLead" validate-on="blur" ui-br-phone-number-mask="areaCode">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="cpfLead">CPF</label>
+                                        <input type="text" id="cpfLead" name="cpfLead" class="form-control" ng-model="event.cpfLead" required-message="'Campo obrigatório'"
+                                            invalid-message="'CPF inválido'" validate-on="blur" ui-br-cpf-mask required>
+
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="birthDateLead ">Data nasc.</label>
+                                        <input type="text" id="birthDateLead" name="birthDateLead" class="form-control" ng-model="event.birthDateLead" required-message="'Campo obrigatório'"
+                                            validator="birthDateValidator() === true" invalid-message="birthDateValidator()"
+                                            validate-on="blur" ui-date-mask required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-3">
+                                        <label for="genreLead">Sexo</label>
+                                        <select id="genreLead" name="genreLead" class="form-control" ng-model="event.genreLead" required-message="'Campo obrigatório'"
+                                            validate-on="blur" required>
+                                            <option value="">Escolha...</option>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Feminino</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="cepLead">CEP</label>
+                                        <input type="text" id="cepLead" name="cepLead" class="form-control" ng-model="event.cepLead" validator="!event.cepError"
+                                            invalid-message="'CEP inválido'" required-message="'Campo obrigatório'" validate-on="blur"
+                                            required ui-br-cep-mask ng-change="viaCep()">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="addressLead">Endereço</label>
+                                        <input type="text" class="form-control" name="neighborhoodLead" id="neighborhoodLead" ng-model="event.neighborhoodLead" validate-on="blur"
+                                            required-message="'Campo obrigatório'" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6 col-sm-3">
+                                        <label for="numberLead">Numero</label>
+                                        <input type="text" id="numberLead" name="numberLead" class="form-control" ng-model="event.numberLead" required-message="'Campo obrigatório'"
+                                            validate-on="blur" required>
+                                    </div>
+                                    <div class="form-group col-6 col-sm-9">
+                                        <label for="complementLead">Complemento</label>
+                                        <input type="text" class="form-control" name="complementLead" id="complementLead" ng-model="event.complementLead">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="neighborhoodLead">Bairro</label>
+                                        <input type="text" class="form-control" name="addressLead" id="addressLead" ng-model="event.addressLead" required-message="'Campo obrigatório'"
+                                            validate-on="blur" required>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="cityLead">Cidade</label>
+                                        <input type="text" name="cityLead" class="form-control" id="cityLead" ng-model="event.cityLead" required-message="'Campo obrigatório'"
+                                            validate-on="blur" required>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="stateLead">Estado</label>
+                                        <input type="text" class="form-control" name="stateLead" id="stateLead" ng-model="event.stateLead" required-message="'Campo obrigatório'"
+                                            validate-on="blur" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="acceptTerms" id="acceptTerms" ng-model="event.acceptTerms" required-message="'Campo obrigatório'"
+                                            validate-on="blur" required>
+                                        <label class="form-check-label" for="acceptTerms">
+                                            Li, concordo e aceito as condições contidas no
+                                            <a href="https://docs.lidery.org.br/termo_uso.html" target="_blank">Termos de Uso</a>,
+                                            <a href="https://docs.lidery.org.br/estatuto_social.html" target="_blank">Estatuto Social</a>,
+                                            <a href="https://docs.lidery.org.br/proposta_admissao.html" target="_blank">Proposta de Admissão</a> e
+                                            <a href="http://mbm.org.br/shared/pdf/condicoes-gerais/Cond_Gerais_e_Especiais_AP.pdf" target="_blank">Condições Gerais Acidentes Pessoais (AP)</a>, e declaro que todas informações
+                                            fornecidas são verdadeiras.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn--green">Confirmar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="redirection" ng-class="{'d-flex': onRedirect}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="redirection__title">Você está sendo redirecionado para nossa página de pagamento</h3>
+                    <div class="redirection__image">
+                        <img class="img-fluid mt-2 mt-md-0 redirection__image__loading" src="../../img/icons/loading.gif">
+                        <img class="img-fluid mt-4" src="../../img/icons/logo-colorida.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

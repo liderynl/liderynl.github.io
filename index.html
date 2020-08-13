@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="lidery" scroll>
+
+<head>
+	
+	<meta charset="UTF-8">
+	<title ng-bind="ngMeta.title">Lidery Web</title>
+	<meta name="description" content="{{ngMeta.description}}" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+	<link rel="manifest" href="img/favicon/manifest.json">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111393747-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+	</script>
+	<!-- End Global site tag (gtag.js) - Google Analytics -->
+
+	<link rel="stylesheet" href="css/style.min.css"/>
+
+	<script src="js/main.min.js"></script>
+
+	<script src="js/main-libs.min.js"></script>
+
+</head>
+
+<body>
+	<div ng-include="'view/shared/header.html'"></div>
+	<div ng-include="'view/shared/modals.html'"></div>
+	<div ng-view></div>
+	<div ng-include="'view/shared/footer.html'"></div>
+</body>
+
+</html>
